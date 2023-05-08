@@ -34,10 +34,9 @@ const arrayOperations = (
         rightKey?.indexOf("[") + 1,
         rightKey?.indexOf("]")
       );
-    //  If Id is present
+      //  If Id is present
       if (id) {
         if (newKey && value) {
-          
           const item = obj.a.b.find((item) => item?._id === id);
           if (item) {
             if (newKey in item) {
@@ -50,7 +49,6 @@ const arrayOperations = (
             // return obj
           }
         } else if (!newKey && value) {
-       
           const item = obj.a.b.find((item) => item?._id === id);
           if (item) {
             // remove name object
@@ -60,50 +58,32 @@ const arrayOperations = (
             // return obj;
           }
         } else if (!newKey && !value) {
-  
-        obj.a.b= obj?.a?.b?.filter((item) => item?._id !== id);
-       
+          obj.a.b = obj?.a?.b?.filter((item) => item?._id !== id);
         }
       } else {
         if (rightKey && rightKey !== "b" && value) {
-         
           if (obj.hasOwnProperty("a")) {
-            
             let keyName = rightKey.includes("[]")
               ? rightKey.replace("[]", "")
               : rightKey;
-              if(leftKey!=='a'){
-            if (typeof obj.a[leftKey] === "undefined") {
-              obj.a[leftKey] = {};
-            }
-            if (!newKey) {
-              
-           
-             
-              obj.a[leftKey][keyName] = [value];
-              
-            } else {
-              // console.log("inside 2", leftKey, rightKey, newKey, value);
-              if (typeof obj.a[leftKey][keyName] === "undefined") {
-                obj.a[leftKey][keyName] = {};
+            if (leftKey !== "a") {
+              if (typeof obj.a[leftKey] === "undefined") {
+                obj.a[leftKey] = {};
               }
-              obj.a[leftKey][keyName][newKey] = value;
+              if (!newKey) {
+                obj.a[leftKey][keyName] = [value];
+              } else {
+                // console.log("inside 2", leftKey, rightKey, newKey, value);
+                if (typeof obj.a[leftKey][keyName] === "undefined") {
+                  obj.a[leftKey][keyName] = {};
+                }
+                obj.a[leftKey][keyName][newKey] = value;
+              }
+            } else {
+              obj.a[keyName] = value;
             }
-
-            // let keyName=rightKey.replace('[]','')
-            // obj.a[leftKey][keyName]=[value]
-
-            // obj.a[leftKey][rightKey.replace('[]','')]=[value]
           }
-          else{
-          
-              obj.a[keyName]=value
-              
-          }
-        }
         } else if (!newKey && rightKey && rightKey !== "b" && value) {
-         
-
           if (rightKey) {
             obj.a[rightKey] = value;
           } else {
@@ -112,7 +92,6 @@ const arrayOperations = (
 
           // return obj
         } else if (!rightKey && leftKey && !value) {
-       
           delete obj.value;
           // return obj
         } else if (leftKey && leftKey.includes("[]")) {
@@ -120,7 +99,6 @@ const arrayOperations = (
           obj.a[leftKey.replace("[]", "")] = [value];
         } else {
           if (leftKey === "images") {
-          
             obj.images = value;
           } else {
             if (value && typeof value === "object") {
@@ -128,7 +106,6 @@ const arrayOperations = (
               obj.a.b.push(value);
               // return obj;
             } else if (!value) {
-            
               // console.log("inside 6");
               delete obj[leftKey][rightKey];
               //  return obj
@@ -223,33 +200,60 @@ const imgUpdateObj = {
       "http://files-test.hokify.com/user/pic_5b30ac932c6ba6190bfd7eef_1573480304827.jpg",
   },
 };
-// const change_array_object=  arrayOperations(obj,"change_array_object",updateArrayObject)
-// console.log(JSON.stringify(change_array_object));
+const change_array_object = arrayOperations(
+  obj,
+  "change_array_object",
+  updateArrayObject
+);
+console.log(JSON.stringify(change_array_object));
 
-// const change_array_value=  arrayOperations(obj,"change_array_value",updateArrayValue)
-//  console.log(JSON.stringify(change_array_value));
+const change_array_value = arrayOperations(
+  obj,
+  "change_array_value",
+  updateArrayValue
+);
+console.log(JSON.stringify(change_array_value));
 
-// const add_an_entry=  arrayOperations(obj,"add_an_entry",newArray)
-//  console.log(JSON.stringify(add_an_entry));
+const add_an_entry = arrayOperations(obj, "add_an_entry", newArray);
+console.log(JSON.stringify(add_an_entry));
 
-// const remove_an_entry=  arrayOperations(obj,"remove_an_entry",removeObj)
-//  console.log(JSON.stringify(remove_an_entry));
+const remove_an_entry = arrayOperations(obj, "remove_an_entry", removeObj);
+console.log(JSON.stringify(remove_an_entry));
 
-// const add_object_value=  arrayOperations(obj,"add_object_value",objectValue)
-//  console.log(JSON.stringify(add_object_value));
-// const change_object_value=  arrayOperations(obj,"change_object_value",changeObjectValue)
-//  console.log(JSON.stringify(change_object_value));
+const add_object_value = arrayOperations(obj, "add_object_value", objectValue);
+console.log(JSON.stringify(add_object_value));
+const change_object_value = arrayOperations(
+  obj,
+  "change_object_value",
+  changeObjectValue
+);
+console.log(JSON.stringify(change_object_value));
 
-// const unset_root_level_value=  arrayOperations(obj,"unset_root_level_value",unsetRootObject)
-//  console.log(JSON.stringify(unset_root_level_value));
-//  ouput
+const unset_root_level_value = arrayOperations(
+  obj,
+  "unset_root_level_value",
+  unsetRootObject
+);
+console.log(JSON.stringify(unset_root_level_value));
 
-// const unset_regular_object=  arrayOperations(obj,"unset_regular_object",unsetRegularObject)
-//  console.log(JSON.stringify(unset_regular_object));
+const unset_regular_object = arrayOperations(
+  obj,
+  "unset_regular_object",
+  unsetRegularObject
+);
+console.log(JSON.stringify(unset_regular_object));
 
-// const multiple_operations=  arrayOperations(obj,"multiple_operations",multipleOperations)
-//  console.log(JSON.stringify(multiple_operations));
-// const add_array_operations=  arrayOperations(obj,"add_array_operations",addArrayObject)
-//  console.log(JSON.stringify(add_array_operations));
-// const update_img_array = arrayOperations(obj, "update_img", imgUpdateObj);
-// console.log(JSON.stringify(update_img_array));
+const multiple_operations = arrayOperations(
+  obj,
+  "multiple_operations",
+  multipleOperations
+);
+console.log(JSON.stringify(multiple_operations));
+const add_array_operations = arrayOperations(
+  obj,
+  "add_array_operations",
+  addArrayObject
+);
+console.log(JSON.stringify(add_array_operations));
+const update_img_array = arrayOperations(obj, "update_img", imgUpdateObj);
+console.log(JSON.stringify(update_img_array));
