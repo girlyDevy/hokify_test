@@ -1,0 +1,18 @@
+Note:
+
+after analysing the problem, there are 2 possible main operations.
+
+with id and without id.
+So my first step was differenciate the incoming update object with these 2  criteria.
+
+With Id:
+
+with Id there are 3 operations:
+replace and existing object with the incoming object, append a new object and remove an object depending on the id.
+I grouped these 3 operations.
+if a newKey is present, the function will append that object. If new key is not present and value is given it will replace the existing name object with the incoming object. if value is null/undefined, it will remove that entry from the test object.
+
+Without Id:
+
+There are few different possibilities here.Where right key is present ,left key is present. new array is given etc. I have added some conditions according to whether these keys or values exist or not. According to that all the operations are made.
+
